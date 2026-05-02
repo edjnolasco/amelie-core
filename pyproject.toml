@@ -1,0 +1,9 @@
+[project]
+name = "amelie-core"
+version = "0.1.0"
+description = "Core engine for Amelie Suite"
+authors = [{name="Edwin José Nolasco"}]
+dependencies = []
+
+[tool.ruff]
+line-length = 100
