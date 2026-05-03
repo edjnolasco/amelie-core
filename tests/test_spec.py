@@ -1,4 +1,5 @@
 from amelie_core.spec.interpreter import interpret_style
+from amelie_core.pipeline.document_pipeline import process_document
 
 
 def test_interpret_style_single_font():
@@ -33,3 +34,22 @@ def test_interpret_style_ambiguous_fonts():
     assert result.spec.font_size == 12
     assert result.spec.spacing == "single"
     assert result.spec.page_size == "letter"
+    
+def test_pipeline_with_style():
+    md = """# Title
+
+## Section
+Content
+"""
+
+    style_text = "Arial 12, interlineado sencillo, carta, márgenes 1 pulgada"
+
+    result = process_document(md, style_text)
+
+    assert result["document"].title == "Title"
+    assert result["validation"].is_valid()
+
+    style = result["style"]
+    assert style is not None
+    assert style.is_resolved()
+    assert style.spec.font_family == "Arial"    

@@ -8,7 +8,10 @@ def test_pipeline_basic():
 Content here
 """
 
-    doc, report = process_document(md)
+    result = process_document(md)
+
+    doc = result["document"]
+    report = result["validation"]
 
     assert doc.title == "Title"
     assert len(doc.sections) >= 1
